@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--  <properties resource="mybatis.properties" />
+         -->
+    <classPathEntry location="C:\Users\LiJunPeng\.m2\repository\mysql\mysql-connector-java\8.0.17\mysql-connector-java-8.0.17.jar" />
+    <context id="msqlTables" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+        <jdbcConnection connectionURL="jdbc:mysql://106.12.7.241:3306/demo112401?serverTimezone=GMT%2B8"
+                        driverClass="com.mysql.cj.jdbc.Driver" password="demo112401" userId="DJHzPimaRznXrJHY" >
+
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+
+        <!-- 数据表对应的model层输出目录：DO实体类  -->
+        <javaModelGenerator targetPackage="main.java.cn.konngo.model" targetProject="src">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+
+        <!-- sql mapper 映射配置文件输出目录：XML文件 -->
+        <sqlMapGenerator targetPackage="main.java.cn.konngo.mapper"  targetProject="src">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+
+        <!-- mybatis3中的mapper接口输出目录：DAO接口类 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="main.java.cn.konngo.dao"  targetProject="src">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+
+        <!--数据库表-->
+        <table tableName="users" domainObjectName="Users"
+               enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false" >
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+    </context>
+</generatorConfiguration>
