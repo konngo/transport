@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="cn.konngo.dao.TransportDao">
+    <resultMap id="transport" type="cn.konngo.model.Transport">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="luxian" column="luxian"/>
+            <result property="shifa" column="shifa"/>
+            <result property="zhongdian" column="zhongdian"/>
+            <result property="descriptions" column="descriptions"/>
+    </resultMap>
+
+    <sql id="columns">
+            `id` ,`name` ,`luxian` ,`shifa`,`zhongdian`,`descriptions`
+    </sql>
+
+    <insert id="insert">
+        insert into `transport`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                `id`,
+            </if>
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="luxian != null">
+                `luxian`,
+            </if>
+            <if test="shifa != null">
+                `shifa`,
+            </if>
+            <if test="zhongdian != null">
+                `zhongdian`,
+            </if>
+            <if test="descriptions != null">
+                `descriptions`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+            #{id} ,
+            </if>
+            <if test="name != null">
+            #{name} ,
+            </if>
+            <if test="luxian != null">
+            #{luxian} ,
+            </if>
+            <if test="shifa != null">
+            #{shifa} ,
+            </if>
+            <if test="zhongdian != null">
+            #{zhongdian} ,
+            </if>
+            <if test="descriptions != null">
+            #{descriptions} ,
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="delete">
+        delete from `transport`
+        <trim prefix="where " prefixOverrides="and ">
+            <if test="id != null">
+                and `id` = #{id}
+            </if>
+            <if test="name != null">
+                and `name` = #{name}
+            </if>
+            <if test="luxian != null">
+                and `luxian` = #{luxian}
+            </if>
+            <if test="shifa != null">
+                and `shifa` = #{shifa}
+            </if>
+            <if test="zhongdian != null">
+                and `zhongdian` = #{zhongdian}
+            </if>
+            <if test="descriptions != null">
+                and `descriptions` = #{descriptions}
+            </if>
+        </trim>
+    </delete>
+
+    <delete id="deleteByIds">
+        delete from `transport`
+        where `id` in
+        <foreach collection="ids" open="(" item="id" separator="," close=")">
+        #{id}
+        </foreach>
+    </delete>
+
+    <update id="update">
+        update `transport`
+        <set>
+                <if test="name != null">
+                    `name` = #{name},
+                </if>
+                <if test="luxian != null">
+                    `luxian` = #{luxian},
+                </if>
+                <if test="shifa != null">
+                    `shifa` = #{shifa},
+                </if>
+                <if test="zhongdian != null">
+                    `zhongdian` = #{zhongdian},
+                </if>
+                <if test="descriptions != null">
+                    `descriptions` = #{descriptions},
+                </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="getById" resultMap="transport">
+        select
+        <include refid="columns" />
+        from `transport`
+        where `id` = #{id}
+    </select>
+
+
+    <select id="list" resultMap="transport">
+        select
+        <include refid="columns" />
+        from `transport`
+        <trim prefix="where " prefixOverrides="and ">
+            <if test="id != null">
+                and `id` = #{id}
+            </if>
+            <if test="name != null">
+                and `name` = #{name}
+            </if>
+            <if test="luxian != null">
+                and `luxian` = #{luxian}
+            </if>
+            <if test="shifa != null">
+                and `shifa` = #{shifa}
+            </if>
+            <if test="zhongdian != null">
+                and `zhongdian` = #{zhongdian}
+            </if>
+            <if test="descriptions != null">
+                and `descriptions` = #{descriptions}
+            </if>
+        </trim>
+    </select>
+</mapper>

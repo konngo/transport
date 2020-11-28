@@ -12,7 +12,7 @@ public class SystemService {
 
     // 查询数据库中是否有该用户
     public Users login(Users users){
-        return null;
+        return usersDao.login(users);
     }
 
     // 注册 添加信息到数据库

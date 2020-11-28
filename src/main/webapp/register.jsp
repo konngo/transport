@@ -1,92 +1,103 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8" autoFlush="true"%>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-            + path + "/";
-%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
-    <base href="<%=basePath%>"/>
-    <title>Register</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <script src="https://www.layuicdn.com/auto/layui.js"></script>
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-
-    <style>
-
-        .container{
-            width: 500px;
-            height: 500px;
-            position: absolute;
-            left:30%;
-            top: 100px;
-        }
-    </style>
-</head>
-
-<body>
-<div class="container">
-<form class="layui-form"  action="users/register">
-
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">用户名</label>
-        <div class="layui-input-inline">
-            <input type="text" name="username" required  lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">密码</label>
-        <div class="layui-input-inline">
-            <input type="password" name="password" id="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">确认密码</label>
-        <div class="layui-input-inline">
-            <input type="password" id="repassword" onblur="checkPwd();" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <div class="layui-input-block">
-            <button class="layui-btn"  id="testsubmits">立即提交</button>
-            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-        </div>
-    </div>
-
-</form>
-</div>
-
-
+<meta charset="utf-8" />
+<title>新用户注册</title>
+<meta name="author" content="DeathGhost" />
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<script src="/js/jquery.js"></script>
+<script src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script>
-    //Demo
-    layui.use('form', function(){
-        var form = layui.form;
+	(function($) {
+		$(window).load(
+				function() {
 
+					$("a[rel='load-content']").click(
+							function(e) {
+								e.preventDefault();
+								var url = $(this).attr("href");
+								$.get(url, function(data) {
+									$(".content .mCSB_container").append(data);
+									$(".content").mCustomScrollbar("scrollTo",
+											"h2:last");
+								});
+							});
 
-    });
+					$(".content").delegate(
+							"a[href='top']",
+							"click",
+							function(e) {
+								e.preventDefault();
+								$(".content").mCustomScrollbar("scrollTo",
+										$(this).attr("href"));
+							});
 
-    function  checkPwd(){
-        if($("#repassword").val()!=$("#password").val()){
-            layer.alert("两次输入密码不一致！");
-            $("#repassword").val("");
-        }
-    }
-
-    <%
-        if (request.getAttribute("msg")!=null){
-            %>
-        alert("${msg}");
-    <%
-        }
-    %>
+				});
+	})(jQuery);
 </script>
+
+<script type="text/javascript">
+		function inputCheck() {
+			if (document.getElementById("userName").value=="" || document.getElementById("userName").value == null){
+					alert("用户名不能为空！");
+					document.getElementById("userName").focus();
+					return false;
+			}
+
+
+			if (document.getElementById("userPwd").value=="" || document.getElementById("userPwd").value == null){
+					alert("登录密码不能为空！");
+					document.getElementById("userPwd").focus();
+					return false;
+			}
+
+		}
+	</script>
+
+</head>
+<body>
+
+	<!--header-->
+	<header>
+		<h1>
+			城市交通
+		</h1>
+		<ul class="rt_nav">
+			<li><a href="login.jsp" class="quit_icon">登录</a>
+			</li>
+		</ul>
+	</header>
+
+	<section class="rt_wrap content mCustomScrollbar">
+		<div class="rt_content">
+			<div class="page_title">
+				<h2 class="fl">新用户注册</h2>
+				<a class="fr top_rt_btn" onClick="javascript :history.back(1);">返回上一页</a>
+			</div>
+			<form name="form" action="register"
+				method="post" onsubmit="return inputCheck()">
+				<ul class="ulColumn2">
+					<li><span class="item_name" style="width:120px;">用户姓名：</span>
+						<input type="text" name="username" id="userName"
+						class="textbox textbox_225" placeholder="请输入用户名" />
+					</li>
+					<li><span class="item_name" style="width:120px;">昵称：</span>
+						<input type="text" name="nickanem" id="nickName"
+							   class="textbox textbox_225" placeholder="请输入昵称" />
+					</li>
+
+					<li><span class="item_name" style="width:120px;">登陆密码：</span>
+						<input type="password" name="userPwd" id="password"
+						class="textbox textbox_225" placeholder="请设置登录密码" />
+					</li>
+
+					<li><span class="item_name" style="width:120px;"></span> <input
+						type="submit" class="link_btn" value="新用户注册" /></li>
+				</ul>
+			</form>
+		</div>
+	</section>
 
 </body>
 </html>

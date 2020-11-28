@@ -20,7 +20,7 @@ public class SystemController {
         Users u=systemService.login(users);
         if (u!=null){
             request.getSession().setAttribute("users",users);
-            return "redirect:/index.jsp";
+            return "redirect:/trans/list";
         }
         request.setAttribute("msg", "账号或密码错误!");
         return "login";
@@ -28,8 +28,9 @@ public class SystemController {
 
     // 注册
     @RequestMapping("register")
-    public void register(Users users){
+    public String register(Users users){
          systemService.register(users);
+         return "login";
     }
 
 }

@@ -14,26 +14,28 @@ public class UsersService {
 
     // 查询所有用户
     public List<Users> list(){
-     return null;
+     return usersDao.list(null);
     }
 
     // 根据id查询
     public Users find(int id){
-        return null;
+        return usersDao.getById(id);
     }
 
     // 更新
     public int update(Users users){
-        return 0;
+        return usersDao.update(users);
     }
 
     // 删除
     public int delete(int id){
-       return 0;
+        Users users=new Users();
+        users.setId(id);
+       return usersDao.delete(users);
     }
 
     // 添加
     public int add(Users users){
-    return 0;
+    return usersDao.insert(users);
     }
 }

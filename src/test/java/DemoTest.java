@@ -15,4 +15,10 @@ public class DemoTest {
         users.setPassword("123");
         System.out.println(dao.login(users));
     }
+
+
+    @Test
+    public void testMybatisPlus1(){
+        System.out.println(dao.list(null));
+    }
 }
